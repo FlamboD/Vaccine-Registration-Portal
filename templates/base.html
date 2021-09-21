@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <title>{{ title }} - Site name</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/VRP.css') }}">
+    {% endblock %}
+    <style>
+        header {
+            background: forestgreen;
+            text-align: center;
+            line-height: 2.5em;
+            color: white;
+            position: relative;
+        }
+        #select-language {
+            --margin: 5px;
+            position: absolute;
+            height: calc(100% - var(--margin) * 2);
+            width: 5em;
+            right: var(--margin);
+            top: var(--margin);
+
+            background: darkgreen;
+            color: white;
+            border: none;
+            border-radius: 5px;
+
+            text-align: center;
+            line-height: 100%;
+        }
+        #title {
+            font-size: 20px;
+            text-align: center;
+            margin: 1em 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span id="header-text">
+            South African COVID-19  Vaccination Programme Registration
+        </span>
+        <button id="select-language">{% if language %}{{ language }}{% else %}English{% endif %}</button>
+    </header>
+    <h1 id="title">Step {{ step }} of 8: {{ title }}</h1>
+    {% block body %}{% endblock %}
+</body>
+</html>

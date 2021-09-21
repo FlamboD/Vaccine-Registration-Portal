@@ -1,0 +1,72 @@
+div.row {
+    position: relative;
+    margin-top: 0;
+}
+form label.label-sub {
+    font-size: 12px;
+    margin-left: 15px;
+}
+select:invalid {
+    color: gray;
+}
+option {
+    color: black;
+}
+div.label-in-border {
+    position: absolute;
+    top: var(--bs-gutter-y);
+    transform: translate(10px, -50%);
+    background: white;
+    padding: 0 5px;
+    font-size: 12px;
+}
+div.label-in-border label {
+    margin: 0;
+}
+button.btn-form-sm {
+    border-radius: 50vh !important;
+    border: 1px solid lightgrey;
+    color: dodgerblue;
+    font-size: 15px;
+    padding: 10px 25px;
+}
+button.btn-form-lg {
+    border-radius: 50vh !important;
+    border: 1px solid lightgrey;
+    color: dodgerblue;
+    font-size: 15px;
+    padding: 10px 25px;
+    width: 100%;
+}
+
+.radio-container {
+    padding: 1em 0 2em;
+}
+
+#logo-8 {
+    max-height: 200px;
+    max-width: 80%;
+    display: block;
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+ol.inset, ul.inset {
+    list-style-position: inside;
+    padding: inherit;
+}
+
+
+div.clear-x {
+    position: relative;
+}
+
+span.clear-x {
+    content: "✕";
+    font-weight: 900;
+    right: 1em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
