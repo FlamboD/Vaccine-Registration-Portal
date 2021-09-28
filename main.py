@@ -1,5 +1,4 @@
 from flask import Flask, render_template, make_response, request
-import json
 
 app = Flask(__name__)
 
@@ -245,11 +244,63 @@ def page4():
     return resp
 
 
-@app.route("/")
-def index():
+def page5():
+    resp = make_response(render_template("5.html", **request.args))
+    resp.set_cookie('page', "5")
+    return resp
+
+
+def page6():
+    resp = make_response(render_template("6.html", **request.args))
+    resp.set_cookie('page', "6")
+    return resp
+
+
+def page6a():
+    resp = make_response(render_template("6a.html", **request.args))
+    resp.set_cookie('page', "6a")
+    return resp
+
+
+def page8():
+    resp = make_response(render_template("8.html", **request.args))
+    resp.set_cookie('page', "8")
+    return resp
+
+
+@app.route("/4")
+def step4():
     print({**request.cookies})
     print(bool(request.cookies))
     return page4()
+
+
+@app.route("/5")
+def step5():
+    print({**request.cookies})
+    print(bool(request.cookies))
+    return page5()
+
+
+@app.route("/6")
+def step6():
+    print({**request.cookies})
+    print(bool(request.cookies))
+    return page6()
+
+
+@app.route("/6a")
+def step6a():
+    print({**request.cookies})
+    print(bool(request.cookies))
+    return page6a()
+
+
+@app.route("/8")
+def step8():
+    print({**request.cookies})
+    print(bool(request.cookies))
+    return page8()
 
 
 app.run(debug=True)
