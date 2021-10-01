@@ -1,5 +1,6 @@
 from flask import Flask, render_template, make_response, request
 
+
 app = Flask(__name__)
 
 
@@ -242,7 +243,25 @@ def page4():
     resp = make_response(render_template("4.html", **request.args, provinces=provinces, municipalities=municipalities))
     resp.set_cookie('page', "4")
     return resp
+def page0():
+    resp = make_response(render_template("0.html",**request.args))
+    resp.set_cookie('page',"0")
+    return resp
 
+def page1():
+    resp = make_response(render_template("1.html",**request.args))
+    resp.set_cookie('page',"1")
+    return resp
+
+def page2():
+    resp = make_response(render_template("2.html",**request.args))
+    resp.set_cookie('page',"2")
+    return resp
+
+def page3():
+    resp = make_response(render_template("3.html",**request.args))
+    resp.set_cookie('page',"3")
+    return resp
 
 def page5():
     resp = make_response(render_template("5.html", **request.args))
@@ -267,6 +286,28 @@ def page8():
     resp.set_cookie('page', "8")
     return resp
 
+@app.route("/0")
+def home():
+    print({**request.cookies})
+    print(bool(request.cookies))
+    return page0()
+
+@app.route("/1")
+def step1():
+    print({**request.cookies})
+    print(bool(request.cookies))
+    return page1()
+@app.route("/2")
+def step2():
+    print({**request.cookies})
+    print(bool(request.cookies))
+    return page2()
+
+@app.route("/3")
+def step3():
+    print({**request.cookies})
+    print(bool(request.cookies))
+    return page3()
 
 @app.route("/4")
 def step4():
@@ -302,5 +343,5 @@ def step8():
     print(bool(request.cookies))
     return page8()
 
-
-app.run(debug=True)
+if __name__== "__main__":
+    app.run(debug=True)

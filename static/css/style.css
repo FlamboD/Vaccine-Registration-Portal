@@ -1,0 +1,123 @@
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+body
+{
+    background-color: whitesmoke;
+    overflow-x: hidden;
+}
+.image
+{
+    top:10%;
+    text-align: center;
+}
+ul
+{
+    font-size: 15px;
+    list-style-position: inside;
+    text-align:left;
+    margin-right: 0;
+    padding-left: 0.5rem;
+}
+.btn-cont
+{
+    margin-bottom: 0.8rem;
+    text-align: center;
+    width:80%;
+}
+.btn-label
+{
+    position: absolute;
+    left:1rem;
+    top:1rem;
+    padding:0 0.5rem;
+}
+.btn-primary
+{
+    background-color: inherit;
+    color:blue;
+    border:0.2rem solid #E2E2E0;
+    border-radius:30px;
+}
+
+.choice-warning
+{
+    margin-left:1em;
+    font-size: small;
+}
+.container
+{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 30%;
+    left: 25%;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+.dropdown
+{
+    position: relative;
+    width:79%;
+    height:3.5rem;
+}
+.dropdown-menu
+{
+    width: 100%;
+}
+.dropdown-toggle:focus ~.btn-label
+{
+    top:-0.8rem;
+    font-size:smaller;
+    background-color: whitesmoke;
+}
+.dropdown-toggle
+{
+    background-color:inherit;
+    /*text-align:right;*/
+    width:100%;
+    height:100%;  
+}
+/*.dropdown-toggle:focus
+{
+    
+    box-shadow: none;
+}*/
+.dropdown-toggle:hover
+{
+    background-color: whitesmoke;
+}
+.fa-info-circle
+{
+    margin-right: 0;
+}
+.image
+{
+    margin-bottom: 2rem;
+}
+.info
+{
+    background-color:#E2E2E0;
+    display: flex;
+    display: row;
+    border-left:50px ;
+    border-radius: 0.8rem;
+    margin-bottom: 1.5rem;
+    padding:0.8rem 0.5rem 0.3rem;
+    text-align: center;
+    width: 79%;    
+}
+.list-heading
+{
+    list-style:none;
+}
+.mini-footer
+{
+    text-align:center;
+    width:80%;
+}
+.span-div
+{
+    margin-bottom:0.5rem;
+}

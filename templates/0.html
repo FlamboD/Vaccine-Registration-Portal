@@ -1,0 +1,52 @@
+{% extends "baseHome.html" %}
+
+
+{% block head %}
+        <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+        
+        <div class="container">
+            <div class="image">
+                <img src="{{ url_for('static', filename='images/icon.jpg') }}" alt="Icon" class="health-icon">
+            </div>
+            <div class="info">    
+               <i class="fa fa-info-circle"  style="font-size:36px"></i>
+               <ul>
+                   <li class="list-heading"><h6>This is the official South African COVID-19 vaccination programme registration portal</h6></li>
+                   <li>Vaccination is <strong>voluntary and no payment is required</strong> </li>
+                   <li>Everyone who registers will be offered vaccination. <strong>When it is your turn, you will receive an SMS</strong> with the date,time and place for your vaccination.</li>
+                   <li> Registration is now open for everybody <strong>18 years and older.</strong></li>
+                   <li>We are moving down the age groups as quickly as possible</li>
+               </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" value""></button>
+                <label for="dropdownMenuButton" class="btn-label">Are you 18 years or older?</label>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a onclick="clicked(0)" class="dropdown-item" href="#">Yes</a>
+                  <a onclick="clicked(1)" class="dropdown-item" href="#">No</a>
+                </div>
+            </div>
+            <div class="span-div">
+                <span class="choice-warning">Tap the box above to make a choice</span>
+            </div>
+            <div class="btn-cont">
+               <a id="navigateID"onclick="cont_secondPage()" href="/1"> <button type="button" class="btn btn-primary btn-lg btn-register">Register for Vaccination</button></a>
+            </div>
+            <div class="mini-footer">
+                <span class="terms">
+                    For more information,terms and conditions please visit:<br>
+                    <a class="terms-link" href="https://sacoronavirus.co.za/evds/tscs/" target="_blank">https://sacoronavirus.co.za/evds/tscs/</a> 
+                </span>
+            </div>
+        </div>
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock %}

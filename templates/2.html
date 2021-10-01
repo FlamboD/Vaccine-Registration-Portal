@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% set title = 'General Information' %}
+{% set step = 2 %}
+
+{% block head %}
+    {{ super() }}
+    
+    <script src="{{ url_for('static', filename='js/dataValidate.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stepTwoStyle.css') }}">
+{% endblock %}
+{%block body%}
+        <div class="container" onload="validate()">
+            <form id="input-form">
+                <div class="form-group">
+                  <input type="text" onkeyup="validate()" class="form-control" id="IDNumber" placeholder=" " maxlength="13">
+                  <label for="IDNumber" class="label-input id-label">ID Number</label>
+                  <span id="valid-id">
+                    ID must be a valid SA 13-digit ID number
+                  </span>
+                </div>
+               <div class="form-group" id ="confIDNumber">
+                    <input type="text" class="form-control" id="confIDNum" placeholder=" " maxlength="13">
+                    <label for="IDNumber" id="id-label" class="label-input id-label">Confirm ID Number</label>
+                </div>
+                
+                <div class="form-group">
+                  
+                  <input type="text" class="form-control" id="passport" placeholder=" ">
+                  <label for="passport" class="label-input" >Passport Number(Optional)</label>
+                  
+                </div>
+                <div class="form-group">
+                    
+                    <input type="text" class="form-control" id="dob" placeholder=" ">
+                    <label for="dob" class="label-input dob-label">Date of Birth(CCYY/MM/DD)</label>
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="firstname" placeholder=" ">
+                    <label for="firstname" class="label-input name-label">First Name(s)</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="surname" placeholder=" ">
+                    <label for="IDNumber" class="label-input surname-label">Surname</label>
+                </div>
+              </form>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
+                    <label for="dropdownMenuButton" class="btn-label">Gender</label>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Male</a>
+                    <a class="dropdown-item" href="#">Female</a>
+                    <a class="dropdown-item" href="#">Other</a>
+                    </div>
+                </div>
+                <div class="form-check">
+                    
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label for="flexCheckDefault">I confirm that the information provided is correct</label>
+                    
+                </div>
+                <div class="back">
+                    <button type="button" id="back-button" class="btn btn-primary button">Go Back</button>
+                    <button type="button" id="next" class="btn btn-primary button">Next Step</button>
+                </div>
+        </div>
+        
+    {% endblock %}

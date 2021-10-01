@@ -1,0 +1,95 @@
+body
+{
+    background-color: rgb(250,250,250);
+    overflow: hidden;
+    
+}
+.container-div
+{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 12em;
+    right:15em;
+    margin-top: -6.25rem;
+    margin-left: -6.25rem;
+    background-color:inherit;
+    width: 60%;
+}
+.form-group
+{
+
+    background-color: inherit;
+    position:relative;
+    width: 100%;
+}
+.form-control
+{
+    border-color:#9b9b9b;
+}
+/*Input boxes when they have content and not focussed on*/
+.form-control,.form-control:not(:placeholder-shown).form-control:not(:focus)
+{
+    background-color: inherit;
+    height:50px;
+}
+/*Input boxes when in focus*/
+.form-control:focus
+{
+    background-color: inherit;
+    border-color: dodgerblue;
+    box-shadow: none;
+    border-width: medium;
+}
+.form-control:focus ~.label-input,.form-control:not(:placeholder-shown).form-control:not(:focus) ~.label-input
+{
+    top:-0.8rem;
+    left:0.3rem;
+    font-size:smaller;
+    background-color:whitesmoke;
+    color: dodgerblue;
+}
+.label-input
+{
+    color:gray;
+    position: absolute;
+    left:1rem;
+    top:0.8rem;
+    padding:0 0.5rem;
+}
+.form-control:not(:placeholder-shown).form-control:not(:focus) ~.label-input
+{
+    color:gray;
+}
+.button
+{
+    position: relative;
+    color:#2397f3;
+    height:fit-content;
+    height:2.9em;
+    width:7em;
+    right:2em;
+}
+.back
+{   
+    text-align:center;
+    
+}
+.btn-primary
+{
+    background-color: inherit;
+    background-repeat:no-repeat;
+    border:0.2rem solid #E2E2E0;
+    border-radius:30px;
+}
+.btn-primary:hover
+{
+    color: #2397f3;
+    background-repeat:no-repeat;
+    border:0.2rem solid #E2E2E0;
+    background-color:#d5e4e4;   
+}
+#back-button
+{
+    margin-right:10px;
+}
