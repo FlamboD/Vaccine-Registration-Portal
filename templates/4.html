@@ -23,7 +23,8 @@
         </symbol>
     </svg>
 
-    <form>
+    <form id="form4">
+<!--        <input type="hidden" name="submit4" id="submit" value="true">-->
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col col-lg-8">
@@ -67,16 +68,16 @@
             <div class="row justify-content-center">
                 <div class="col col-lg-8">
                     <label for="address"></label>
-                    <input type="text" id="address" class="form-control" placeholder="Address">
+                    <input type="text" id="address" name="address" class="form-control" placeholder="Address">
                     <label class="label-sub" for="address">Address is optional</label>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col col-2">
-                    <button type="button" class="btn btn-form-sm float-start">Go back</button>
+                    <button type="submit" name="return" value="true" class="btn btn-form-sm float-start" formnovalidate>Go back</button>
                 </div>
                 <div class="col col-2">
-                    <button type="submit" class="btn btn-form-sm">Next step</button>
+                    <button type="submit" name="submit" value="true" class="btn btn-form-sm">Next step</button>
                 </div>
             </div>
         </div>
@@ -103,6 +104,5 @@
                 datalist.append(o);
             });
         }
-        // populateMunicipalities();
     </script>
 {% endblock %}

@@ -21,6 +21,7 @@
     </svg>
 
     <form>
+<!--        <input type="hidden" name="submit5" id="submit" value="true">-->
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col col-lg-8">
@@ -45,14 +46,14 @@
             <div class="row justify-content-center">
                 <div class="col col-sm-3">
                     <div class="radio-container">
-                        <input class="form-check-input" type="radio" name="week" id="weekday" required>
+                        <input class="form-check-input" type="radio" name="week" id="weekday" value="weekday" required>
                         <label class="form-check-label" for="weekday">Weekday</label>
                     </div>
                 </div>
                 <div class="col col-sm-3">
                     <div class="radio-container">
-                        <input class="form-check-input" type="radio" name="week" id="weekend">
-                        <label class="form-check-label" for="weekend">Weekday</label>
+                        <input class="form-check-input" type="radio" name="week" id="weekend" value="weekend">
+                        <label class="form-check-label" for="weekend">Weekend</label>
                     </div>
                 </div>
             </div>
@@ -65,23 +66,23 @@
             <div class="row justify-content-center">
                 <div class="col col-sm-3">
                     <div class="radio-container">
-                        <input class="form-check-input" type="radio" name="day" id="morning" required>
+                        <input class="form-check-input" type="radio" name="day" id="morning" value="morning" required>
                         <label class="form-check-label" for="morning">Morning</label>
                     </div>
                 </div>
                 <div class="col col-sm-3">
                     <div class="radio-container">
-                        <input class="form-check-input" type="radio" name="day" id="afternoon">
+                        <input class="form-check-input" type="radio" name="day" id="afternoon" value="afternoon">
                         <label class="form-check-label" for="afternoon">Afternoon</label>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col col-2">
-                    <button type="button" class="btn btn-form-sm float-start">Go back</button>
+                    <button type="submit" name="return" value="true" class="btn btn-form-sm float-start" formnovalidate>Go back</button>
                 </div>
                 <div class="col col-2">
-                    <button type="submit" class="btn btn-form-sm">Next step</button>
+                    <button type="submit" name="submit" value="true" class="btn btn-form-sm">Next step</button>
                 </div>
             </div>
         </div>
