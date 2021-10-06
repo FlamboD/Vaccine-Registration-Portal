@@ -1,0 +1,68 @@
+body
+{
+    overflow-x:hidden;
+}
+.buttons
+{
+    width: 72.5%;
+}
+.btn-primary
+{
+    background-color: inherit;
+    background-repeat:no-repeat;
+    border:0.2rem solid #E2E2E0;
+    border-radius:30px;
+}
+.btn-primary:hover
+{
+    background-color: #E2E2E0;
+    background-repeat:no-repeat;
+    border:0.2rem solid #E2E2E0;
+    
+}
+#asylum, #asylum:not(:focus)
+{
+    color:black;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width:100%;
+}
+#asylum:focus
+{
+    background-color: #E2E2E0;
+}
+
+#back-button
+{
+    color:blue;
+}
+#back-button:hover
+{
+    background-color:#E2E2E0;
+}
+.back
+{   
+    text-align:center;
+}
+.container
+{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 30%;
+    left: 30%;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+#id
+{
+    color: blue;
+    margin-bottom: 2%;
+    width:100%;
+}
+
+#passport
+{
+    color:black;
+    width:100%;
+}

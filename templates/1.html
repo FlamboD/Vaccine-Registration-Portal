@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set title = 'Method of Identification' %}
+{% set step = 1 %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stepOneStyle.css') }}">
+{% endblock %}
+{%block body%}
+    <div class="container">
+        
+        <div class="buttons">
+        <div class="div-id">
+            <button type="button" id="id" class="btn btn-primary btn-lg">Use South African ID</button>
+        </div>
+        <div class="div-passport">
+            <button type="button" id="passport" class="btn btn-primary btn-lg">Use Passport</button>
+        </div>
+        <div class="div-asylum">
+            <button type="button" id="asylum" class="btn btn-primary btn-lg">Use Asylum Seeker/ Refugee Number</button>
+        </div>
+        <div class="back">
+            <button type="button" id="back-button" class="btn btn-primary btn-lg ">Go Back</button>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+</html>
