@@ -43,7 +43,7 @@
             <div class="row justify-content-center gy-4">
                 <div class="col col-lg-8">
                     <div class="clear-x">
-                        <select name="medical-scheme-name" id="medical-scheme-name" class="form-select"></select>
+                        <select name="medical-scheme-name" id="medical-scheme-name" class="form-select" required></select>
                         <span class="clear-x" onclick="clearMedicalScheme();">✕</span>
                     </div>
                     <div class="label-in-border">
@@ -54,7 +54,7 @@
             </div>
             <div class="row justify-content-center gy-4">
                 <div class="col col-8">
-                    <input name="medical-scheme-number" id="medical-scheme-number" class="form-control">
+                    <input name="medical-scheme-number" id="medical-scheme-number" class="form-control" required>
                     <div class="label-in-border">
                         <label for="medical-scheme-number">Medical aid scheme number</label>
                     </div>
@@ -63,7 +63,10 @@
             <br>
             <div class="row justify-content-center">
                 <div class="col col-2">
-                    <button type="submit" class="btn btn-form-lg">Go back</button>
+                    <button type="submit" name="return" value="true" class="btn btn-form-sm float-start" formnovalidate>Go back</button>
+                </div>
+                <div class="col col-2">
+                    <button type="submit" name="submit" value="true" class="btn btn-form-sm">Next step</button>
                 </div>
             </div>
         </div>
