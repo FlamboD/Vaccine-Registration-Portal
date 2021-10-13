@@ -1,18 +1,59 @@
+function hide()
+{
+    $("#label-gender").css("display","none");
+    
+}
+function enableButton()
+{
+    const submitButton = $("#next");
+    let checkbox =$("#flexCheckDefault").is(":checked");
+    if (submitButton.attr("disabled") && checkbox)
+    {
+        submitButton.removeAttr("disabled");
+    }
+    else
+    {
+        submitButton.attr("disabled","true");
+    }
+}
+function date()
+{
+    const calendar = $("#calendar");
+    $(document).ready(function(){
+        calendar.datepicker();
+    })
+}
+function submitData()
+{
+    const id = $("#IDNumber");
+    const confID = $("#confIDNumber");
+    const dataForm = $("#input-form");
+    dataForm.submit();
+    
+}
 function validate()
 {
     const id = $("#IDNumber");
     const confID = $("#confIDNumber");
-    const IDlabel = $("#id-label");
+    const cidLabel = $("#cid-label");
+    const idLabel = $("#id-label");
+    const validLabel = $("#valid-id");
     let DOB = $("#dob");
 
-    if ((validateChecksum(id.val()) || isValidDOB(id.val()) || isValidGender(id.val())))
+    if ((validateChecksum(id.val())))
     {   
+        validLabel.css("display","none")
         confID.css("display","block");
         DOB.val(getDOB(id.val()));
+        id.css("border-color","#9b9b9b");
+        idLabel.css("color","#9b9b9b");
+
         
     }
     else
     {
+        validLabel.css("display","block");
+        idLabel.css("color","red");
         confID.css("display","none");
         id.css("border-color","red");
     }
@@ -144,3 +185,4 @@ function getDOB(IDNum)
     }
     return DOB;
 }
+

@@ -1,18 +1,24 @@
-function clicked(index)
+function hide()
 {
-    const dropdown = $("#dropdownMenuButton");
-    const links = $(".dropdown-item");
-    dropdown.val(links[index].innerHTML)
+    const second = $("#second");
+    const main = $("#label-year");
+    main.css("display","none");
+    second.css("display","block");
 }
-function cont_secondPage()
+function redirect()
 {
-    const dropdown = $("#dropdownMenuButton");
-    const navigateLink = $("#navigateID");
-    if (dropdown.val()!=="Yes")
+    const choiceSelect =$("#choice :selected");
+    const choice =$("#choice");
+    const choiceWarning =$(".choice-warning")[0];
+    if (choiceSelect.text()==="")
     {
-        navigateLink.href = "#";
-        alert("You need to be 18 years or older");
+        choiceWarning.innerHTML="This field must be selected";
+        choiceWarning.css("color","red");
+        choice.css("border-color","red");
     }
-    
-
+    else if(choiceSelect.text()==="No")
+    {
+        choiceWarning.innerHTML="Tap the box above to make a choice";
+        alert("You must be years or older");
+    }
 }

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, make_response, request
+from werkzeug.utils import redirect
 
 
 app = Flask(__name__)
@@ -244,16 +245,31 @@ def page4():
     resp.set_cookie('page', "4")
     return resp
 def page0():
+    warning_phrase =["Tap the box above to make a choice","This field must be selected"]
+    if request.args.get("isOver18")=="YES":
+        return redirect("/1")
     resp = make_response(render_template("0.html",**request.args))
     resp.set_cookie('page',"0")
     return resp
 
 def page1():
+    req = request.args
+    if req.get("id")=="true":
+        return redirect("/2")
+    elif req.get("passport")=="true":
+        pass
+    elif req.get("asylum")=="true":
+        pass
+    elif req.get("back")=="true":
+        return redirect("/0")
+    else:
+        pass
     resp = make_response(render_template("1.html",**request.args))
     resp.set_cookie('page',"1")
     return resp
 
 def page2():
+    print({**request.args})
     resp = make_response(render_template("2.html",**request.args))
     resp.set_cookie('page',"2")
     return resp
@@ -297,8 +313,11 @@ def step1():
     print({**request.cookies})
     print(bool(request.cookies))
     return page1()
-@app.route("/2")
+@app.route("/2", methods=['GET', 'POST'])
 def step2():
+    if request.method=="POST":
+        req = request.form
+        print(req)
     print({**request.cookies})
     print(bool(request.cookies))
     return page2()

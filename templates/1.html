@@ -8,21 +8,22 @@
 {% endblock %}
 {%block body%}
     <div class="container">
-        
-        <div class="buttons">
-        <div class="div-id">
-            <button type="button" id="id" class="btn btn-primary btn-lg">Use South African ID</button>
-        </div>
-        <div class="div-passport">
-            <button type="button" id="passport" class="btn btn-primary btn-lg">Use Passport</button>
-        </div>
-        <div class="div-asylum">
-            <button type="button" id="asylum" class="btn btn-primary btn-lg">Use Asylum Seeker/ Refugee Number</button>
-        </div>
-        <div class="back">
-            <button type="button" id="back-button" class="btn btn-primary btn-lg ">Go Back</button>
-        </div>
-        </div>
+        <form action="">
+            <div class="buttons">
+                <div class="div-id">
+                    <button type="submit" name="id" value="true" id="id" class="btn btn-primary btn-lg"onclick="location.href='/2'">Use South African ID</button>
+                </div>
+                <div class="div-passport">
+                    <button type="submit" name="passport" value="true" id="passport" class="btn btn-primary btn-lg">Use Passport</button>
+                </div>
+                <div class="div-asylum">
+                    <button type="submit" name="asylum" value="true" id="asylum" class="btn btn-primary btn-lg">Use Asylum Seeker/ Refugee Number</button>
+                </div>
+                <div class="back">
+                    <button type="submit" name="back" value="true" id="back-button" class="btn btn-primary btn-lg ">Go Back</button>
+                </div>
+            </div>
+        </form>
     </div>
 {% endblock %}
 </html>
