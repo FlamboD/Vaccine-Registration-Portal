@@ -14,18 +14,21 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div class="container-div">
+          <form action="">
             <div class="form-group step-3">
-                <input type="text" class="form-control" id="CellNumber" placeholder=" " maxlength="10">
-                <label for="CellNumber" class="label-input cell-label">Mobile Number</label>
-              </div>
-              <div class="form-group step-3">
-                <input type="text" class="form-control" id="email" placeholder=" ">
-                <label for="email" class="label-input" >E-mail address</label>
-              </div>
-              <div class="back">
-                <button type="button" id="back-button" class="btn btn-primary button">Go Back</button>
-                <button type="button" id="next" class="btn btn-primary button">Next Step</button>
+              <input type="text" class="form-control" id="CellNumber" placeholder=" " minlength="10" maxlength="10" pattern="[0-9]+" required>
+              <label for="CellNumber" class="label-input cell-label">Mobile Number</label>
             </div>
+            <div class="form-group step-3">
+              <input type="email" class="form-control" id="email" placeholder=" ">
+              <label for="email" class="label-input" >E-mail address</label>
+            </div>
+            <div class="back">
+              <button type="button" id="back-button" name="back" value="true" class="btn btn-primary button">Go Back</button>
+              <button type="submit" id="next" name="next" value="true" class="btn btn-primary button">Next Step</button>
+            </div>
+          </form>
+            
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

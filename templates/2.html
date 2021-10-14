@@ -11,59 +11,60 @@
 {% endblock %}
 {%block body%}
         <div class="container" onload="validate()">
-            <form id="input-form">
+            <form id="input-form" action="/2" method="POST">
                 <div class="form-group">
-                  <input type="text" onkeyup="validate()" class="form-control" id="IDNumber" placeholder=" " maxlength="13">
-                  <label for="IDNumber" class="label-input id-label">ID Number</label>
+                  <input type="text" onkeyup="validate()" class="form-control" id="IDNumber" name="IDNumber" placeholder=" " minlength="13" maxlength="13" required>
+                  <label for="IDNumber" id="id-label" class="label-input id-label">ID Number</label>
                   <span id="valid-id">
                     ID must be a valid SA 13-digit ID number
                   </span>
                 </div>
-               <div class="form-group" id ="confIDNumber">
-                    <input type="text" class="form-control" id="confIDNum" placeholder=" " maxlength="13">
-                    <label for="IDNumber" id="id-label" class="label-input id-label">Confirm ID Number</label>
+                <div style="display: none;" class="form-group" id ="confIDNumber">
+                    <input type="text" class="form-control" id="confIDNum" name="confIDNum" placeholder=" " minlength="13" maxlength="13">
+                    <label for="IDNumber" id="cid-label" class="label-input id-label">Confirm ID Number</label>
                 </div>
                 
                 <div class="form-group">
                   
-                  <input type="text" class="form-control" id="passport" placeholder=" ">
+                  <input type="text" class="form-control" id="passport" name="passport"placeholder=" ">
                   <label for="passport" class="label-input" >Passport Number(Optional)</label>
                   
                 </div>
                 <div class="form-group">
                     
-                    <input type="text" class="form-control" id="dob" placeholder=" ">
+                    <input type="text" class="form-control" id="dob" name="dob" value="" placeholder=" ">
                     <label for="dob" class="label-input dob-label">Date of Birth(CCYY/MM/DD)</label>
-                    <i class="fa fa-calendar"></i>
+                    <i onclick="date()" id="calendar" class="fa fa-calendar"></i>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="firstname" placeholder=" ">
+                    <input type="text" class="form-control" id="firstname" name="firstname" pattern="[A-Za-z]" placeholder=" " required>
                     <label for="firstname" class="label-input name-label">First Name(s)</label>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="surname" placeholder=" ">
+                    <input type="text" class="form-control" id="surname" name="surname" placeholder=" " required>
                     <label for="IDNumber" class="label-input surname-label">Surname</label>
                 </div>
-              </form>
+               
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
-                    <label for="dropdownMenuButton" class="btn-label">Gender</label>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Male</a>
-                    <a class="dropdown-item" href="#">Female</a>
-                    <a class="dropdown-item" href="#">Other</a>
-                    </div>
+                    <select name="gender" id="gender" class="form-select dropdown-toggle" onchange="hide()">
+                        <option class="option" value="male" hidden></option> 
+                        <option class="option" value="male">Male</option> 
+                        <option class="option" value="female">Female</option>
+                        <option class="option" value="other">Other</option>
+                    </select>
+                    <label for="dropdownMenuButton" id="label-gender"class="btn-label">Gender</label>    
                 </div>
                 <div class="form-check">
-                    
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" name="flexCheckDefault" value="" id="flexCheckDefault" onclick="enableButton()"required>
                     <label for="flexCheckDefault">I confirm that the information provided is correct</label>
-                    
                 </div>
                 <div class="back">
-                    <button type="button" id="back-button" class="btn btn-primary button">Go Back</button>
-                    <button type="button" id="next" class="btn btn-primary button">Next Step</button>
+                    <button type="button" id="back-button" name="back" value="true"class="btn btn-primary button">Go Back</button>
+                    <button type="submit" id="next" name="next" value="true" class="btn btn-primary button" disabled>Next Step</button>
                 </div>
+              </form>
+                
+                
         </div>
         
     {% endblock %}
