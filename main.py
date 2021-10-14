@@ -2,6 +2,7 @@ from flask import Flask, render_template, make_response, request
 from werkzeug.utils import redirect
 
 
+
 app = Flask(__name__)
 
 
@@ -275,6 +276,12 @@ def page2():
     return resp
 
 def page3():
+    if  request.args.get('next')=="true":
+        return redirect("/4")
+    elif request.args.get("back")=="true":
+        return redirect("/2")
+    else:
+        pass
     resp = make_response(render_template("3.html",**request.args))
     resp.set_cookie('page',"3")
     return resp

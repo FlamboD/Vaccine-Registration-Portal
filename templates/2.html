@@ -13,13 +13,13 @@
         <div class="container" onload="validate()">
             <form id="input-form" action="/2" method="POST">
                 <div class="form-group">
-                  <input type="text" onkeyup="validate()" class="form-control" id="IDNumber" name="IDNumber" placeholder=" " minlength="13" maxlength="13">
+                  <input type="text" onkeyup="validate()" class="form-control" id="IDNumber" name="IDNumber" placeholder=" " minlength="13" maxlength="13" required>
                   <label for="IDNumber" id="id-label" class="label-input id-label">ID Number</label>
                   <span id="valid-id">
                     ID must be a valid SA 13-digit ID number
                   </span>
                 </div>
-               <div style="display: none;" class="form-group" id ="confIDNumber">
+                <div style="display: none;" class="form-group" id ="confIDNumber">
                     <input type="text" class="form-control" id="confIDNum" name="confIDNum" placeholder=" " minlength="13" maxlength="13">
                     <label for="IDNumber" id="cid-label" class="label-input id-label">Confirm ID Number</label>
                 </div>
@@ -32,12 +32,12 @@
                 </div>
                 <div class="form-group">
                     
-                    <input type="text" class="form-control" id="dob" name="dob" placeholder=" ">
+                    <input type="text" class="form-control" id="dob" name="dob" value="" placeholder=" ">
                     <label for="dob" class="label-input dob-label">Date of Birth(CCYY/MM/DD)</label>
                     <i onclick="date()" id="calendar" class="fa fa-calendar"></i>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder=" " required>
+                    <input type="text" class="form-control" id="firstname" name="firstname" pattern="[A-Za-z]" placeholder=" " required>
                     <label for="firstname" class="label-input name-label">First Name(s)</label>
                 </div>
                 <div class="form-group">
