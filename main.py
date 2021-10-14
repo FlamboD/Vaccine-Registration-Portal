@@ -7,6 +7,12 @@ app = Flask(__name__)
 
 
 def page4():
+    if request.args.get("return") == "true":
+        return redirect("3")
+
+    if request.args.get("submit") == "true":
+        return redirect("5")
+
     provinces = [
         ("Eastern Cape", "EC"),
         ("Free State", "FS"),
@@ -287,18 +293,36 @@ def page3():
     return resp
 
 def page5():
+    if request.args.get("return") == "true":
+        return redirect("4")
+
+    if request.args.get("submit") == "true":
+        return redirect("6")
+
     resp = make_response(render_template("5.html", **request.args))
     resp.set_cookie('page', "5")
     return resp
 
 
 def page6():
+    if request.args.get("return") == "true":
+        return redirect("5")
+
+    if request.args.get("medical-aid") == "yes":
+        return redirect("6a")
+
+    elif request.args.get("medical-aid") == "no":
+        return redirect("8")
+
     resp = make_response(render_template("6.html", **request.args))
     resp.set_cookie('page', "6")
     return resp
 
 
 def page6a():
+    if request.args.get("return") == "true":
+        return redirect("6")
+
     resp = make_response(render_template("6a.html", **request.args))
     resp.set_cookie('page', "6a")
     return resp
@@ -335,38 +359,35 @@ def step3():
     print(bool(request.cookies))
     return page3()
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
+
 @app.route("/4")
 def step4():
-    print({**request.cookies})
-    print(bool(request.cookies))
+    print({**request.args})
     return page4()
 
 
 @app.route("/5")
 def step5():
-    print({**request.cookies})
-    print(bool(request.cookies))
+    print({**request.args})
     return page5()
 
 
 @app.route("/6")
 def step6():
-    print({**request.cookies})
-    print(bool(request.cookies))
     return page6()
 
 
 @app.route("/6a")
 def step6a():
-    print({**request.cookies})
-    print(bool(request.cookies))
     return page6a()
 
 
 @app.route("/8")
 def step8():
-    print({**request.cookies})
-    print(bool(request.cookies))
     return page8()
 
 if __name__== "__main__":
