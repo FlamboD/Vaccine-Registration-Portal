@@ -23,8 +23,8 @@ def validateChecksum(id_number):
         return True
     else:
         return False
-def allData(id_number,confID,dob,name,surname,gender):
-    valid_ID = validateChecksum(id_number)
+def id_match(idNumber,confID):
+    return str(idNumber)==str(confID)
     
         
 

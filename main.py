@@ -1,5 +1,6 @@
 from flask import Flask, render_template, make_response, request
 from werkzeug.utils import redirect
+import modules.dataValidation as data
 
 
 
@@ -276,8 +277,27 @@ def page1():
     return resp
 
 def page2():
-    print({**request.args})
-    resp = make_response(render_template("2.html",**request.args))
+    id,name,surname,dob,confID,passport="","","","","",""
+    checksum = True
+    if request.method=="POST":
+        id = request.form["IDNumber"]
+        name = request.form["firstname"]
+        dob = request.form["dob"]
+        passport = request.form["passport"]
+        confID = request.form["confIDNum"]
+        surname = request.form["surname"]
+        gender = request.form["gender"]
+        checksum = data.validateChecksum(id)
+        id_match = data.id_match(id,confID)
+        if checksum & id_match:
+            print("Adding to database")
+        else:
+            #send back error responses
+            pass
+
+
+        
+    resp = make_response(render_template("2.html",**request.args,id=id,name=name,surname=surname,dob=dob,confID=confID,checksum=checksum))
     resp.set_cookie('page',"2")
     return resp
 

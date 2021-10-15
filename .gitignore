@@ -1,3 +1,4 @@
 **/test.py
 **/.idea
+/modules/__pycache__
 venv

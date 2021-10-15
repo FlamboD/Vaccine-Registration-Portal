@@ -10,44 +10,44 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/stepTwoStyle.css') }}">
 {% endblock %}
 {%block body%}
-        <div class="container" onload="validate()">
+        <div class="container">
             <form id="input-form" action="/2" method="POST">
                 <div class="form-group">
-                  <input type="text" onkeyup="validate()" class="form-control" id="IDNumber" name="IDNumber" placeholder=" " minlength="13" maxlength="13" required>
+                  <input type="text" onkeyup="validate({checksum})" class="form-control" id="IDNumber" name="IDNumber" value="{{ id }}" placeholder=" " minlength="13" maxlength="13" required>
                   <label for="IDNumber" id="id-label" class="label-input id-label">ID Number</label>
                   <span id="valid-id">
                     ID must be a valid SA 13-digit ID number
                   </span>
                 </div>
                 <div style="display: none;" class="form-group" id ="confIDNumber">
-                    <input type="text" class="form-control" id="confIDNum" name="confIDNum" placeholder=" " minlength="13" maxlength="13">
+                    <input type="text" class="form-control" id="confIDNum" name="confIDNum"  value="{{ confID }}" placeholder=" " minlength="13" maxlength="13">
                     <label for="IDNumber" id="cid-label" class="label-input id-label">Confirm ID Number</label>
                 </div>
                 
                 <div class="form-group">
                   
-                  <input type="text" class="form-control" id="passport" name="passport"placeholder=" ">
+                  <input type="text" class="form-control" id="passport" value="{{ passport }}"name="passport"placeholder=" ">
                   <label for="passport" class="label-input" >Passport Number(Optional)</label>
                   
                 </div>
                 <div class="form-group">
                     
-                    <input type="text" class="form-control" id="dob" name="dob" value="" placeholder=" ">
+                    <input type="text" class="form-control" id="dob" value="{{ dob }}"name="dob" value="" placeholder=" ">
                     <label for="dob" class="label-input dob-label">Date of Birth(CCYY/MM/DD)</label>
                     <i onclick="date()" id="calendar" class="fa fa-calendar"></i>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="firstname" name="firstname" pattern="[A-Za-z]" placeholder=" " required>
+                    <input type="text" class="form-control" id="firstname" value="{{ name }}" name="firstname" placeholder=" " required>
                     <label for="firstname" class="label-input name-label">First Name(s)</label>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="surname" name="surname" placeholder=" " required>
+                    <input type="text" class="form-control" id="surname" value="{{ surname }}" name="surname" placeholder=" " required>
                     <label for="IDNumber" class="label-input surname-label">Surname</label>
                 </div>
                
                 <div class="dropdown">
-                    <select name="gender" id="gender" class="form-select dropdown-toggle" onchange="hide()">
-                        <option class="option" value="male" hidden></option> 
+                    <select name="gender" id="gender" class="form-select dropdown-toggle" onchange="hide()" required>
+                        <option class="option" value="" hidden></option> 
                         <option class="option" value="male">Male</option> 
                         <option class="option" value="female">Female</option>
                         <option class="option" value="other">Other</option>
@@ -63,8 +63,6 @@
                     <button type="submit" id="next" name="next" value="true" class="btn btn-primary button" disabled>Next Step</button>
                 </div>
               </form>
-                
-                
         </div>
         
     {% endblock %}
