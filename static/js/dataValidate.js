@@ -23,15 +23,7 @@ function date()
         calendar.datepicker();
     })
 }
-function submitData()
-{
-    const id = $("#IDNumber");
-    const confID = $("#confIDNumber");
-    const dataForm = $("#input-form");
-    dataForm.submit();
-    
-}
-function validate()
+function validate(checksum)
 {
     const id = $("#IDNumber");
     const confID = $("#confIDNumber");
@@ -40,7 +32,7 @@ function validate()
     const validLabel = $("#valid-id");
     let DOB = $("#dob");
 
-    if ((validateChecksum(id.val())))
+    if (checksum)
     {   
         validLabel.css("display","none")
         confID.css("display","block");
@@ -58,51 +50,7 @@ function validate()
         id.css("border-color","red");
     }
 }
-function validateChecksum(IDNum)
-{
-    let sum=0;
-    let miniSum=0;
-    let product;
-    let currentDigit;
-    let checksum=null;
-    if (!(isNaN(IDNum)) && IDNum.length===13)
-    {
-        for (let i=0;i<12;i++)
-        {
-            currentDigit = parseInt(IDNum.substr(i,1),10);
-            if (!(i%2===0))
-            {
-                product = currentDigit*2;
-                if (product>9)
-                {
-                    miniSum = parseInt(product.toString()[0],10) +parseInt(product.toString()[1],10)
-                    sum +=miniSum;
-                }
-                else
-                {
-                    sum += product; 
-                }
-            }
-            else
-            {
-                sum += currentDigit;
-            }
-        }
-    }
-    checksum = 10 - (sum%10);
-    if (checksum>9)
-    {
-        checksum = 0;
-    }
-    if (checksum === parseInt(IDNum[12],10))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
+
 function isValidDOB(IDNum)
 {
     let year;
