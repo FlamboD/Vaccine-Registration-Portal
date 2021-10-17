@@ -1,7 +1,6 @@
 {% extends "baseHome.html" %}
 
 
-
 {% block head %}
         <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -12,8 +11,8 @@
 {% block body %}
         
         <div class="container">
-            <div class="image">
-                <img src="" alt="Icon" class="health-icon">
+            <div class="-image">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Icon" class="health-icon">
             </div>
             <div class="info">    
                <i class="fa fa-info-circle"  style="font-size:36px"></i>
@@ -25,28 +24,24 @@
                    <li>We are moving down the age groups as quickly as possible</li>
                </ul>
             </div>
-            <form action="">
-                <div class="dropdown">
-                    <select name="isOver18" id="choice" class="form-select dropdown-toggle" onclick="hide()">
-                        <option value="empty" hidden></option>
-                        <option value="YES">Yes</option> 
-                        <option value="NO">No</option>
-                    </select>
-                    <label style="display: none;"for="dropdownMenuButton" id="second" class="second">Are you 18 years or older?</label>
-                    <label for="dropdownMenuButton" id="label-year" class="btn-label">Are you 18 years or older?</label>    
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" value""></button>
+                <label for="dropdownMenuButton" class="btn-label">Are you 18 years or older?</label>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a onclick="clicked(0)" class="dropdown-item" href="#">Yes</a>
+                  <a onclick="clicked(1)" class="dropdown-item" href="#">No</a>
+                </div>
             </div>
             <div class="span-div">
                 <span class="choice-warning">Tap the box above to make a choice</span>
             </div>
             <div class="btn-cont">
-               <button type="submit" name="submit" class="btn btn-primary btn-lg btn-register">Register for Vaccination</button>
+               <a id="navigateID"onclick="cont_secondPage()" href="/1"> <button type="button" class="btn btn-primary btn-lg btn-register">Register for Vaccination</button></a>
             </div>
-
-            </form>
             <div class="mini-footer">
                 <span class="terms">
                     For more information,terms and conditions please visit:<br>
-                    <a class="terms-link" href="https://optisolutions.co.za" target="_blank">optisolutions.co.za</a> 
+                    <a class="terms-link" href="https://sacoronavirus.co.za/evds/tscs/" target="_blank">https://sacoronavirus.co.za/evds/tscs/</a> 
                 </span>
             </div>
         </div>
