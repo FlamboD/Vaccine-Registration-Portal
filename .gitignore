@@ -2,3 +2,4 @@
 **/.idea
 /modules/__pycache__
 venv
+.env
