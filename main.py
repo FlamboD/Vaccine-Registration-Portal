@@ -1,12 +1,18 @@
+import os
 from flask import Flask, render_template, make_response, request
 from werkzeug.utils import redirect
+from dotenv import load_dotenv
 import modules.dataValidation as data
+import modules.models as models
 
 
-
+load_dotenv()
 app = Flask(__name__)
-
-
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:1234@localhost:5432/Vaccine_Registration"
+models.db.init_app(app)
+id=""
+        
 def page4():
     if request.args.get("return") == "true":
         return redirect("3")
@@ -289,10 +295,12 @@ def page2():
         gender = request.form["gender"]
         checksum = data.validateChecksum(id)
         id_match = data.id_match(id,confID)
-        if checksum & id_match:
-            print("Adding to database")
+        if checksum:
+            PDetails = models.personal_details(id,passport,surname,name,dob,gender)
+            models.db.session.add(PDetails)
+            models.db.session.commit()
+            return redirect("/3")
         else:
-            #send back error responses
             pass
 
 
@@ -308,6 +316,7 @@ def page3():
         return redirect("/2")
     else:
         pass
+    print(id)
     resp = make_response(render_template("3.html",**request.args))
     resp.set_cookie('page',"3")
     return resp
@@ -373,7 +382,7 @@ def step2():
     print(bool(request.cookies))
     return page2()
 
-@app.route("/3")
+@app.route("/3",methods=['GET', 'POST'])
 def step3():
     print({**request.cookies})
     print(bool(request.cookies))
@@ -409,6 +418,8 @@ def step6a():
 @app.route("/8")
 def step8():
     return page8()
+def main():
+    models.db.create_all()
 
 if __name__== "__main__":
     app.run(debug=True)
