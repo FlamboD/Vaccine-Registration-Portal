@@ -13,15 +13,22 @@ option {
     color: black;
 }
 div.label-in-border {
-    position: absolute;
-    top: var(--bs-gutter-y);
-    transform: translate(10px, -50%);
-    background: white;
-    padding: 0 5px;
-    font-size: 12px;
+    /*position: absolute;*/
+    /*top: var(--bs-gutter-y);*/
+    /*transform: translate(10px, -50%);*/
+    /*background: white;*/
+    /*padding: 0 5px;*/
+    /*font-size: 12px;*/
 }
 div.label-in-border label {
     margin: 0;
+    position: absolute;
+    top: 0;
+    left: 2em;
+    transform: translateY(-50%);
+    font-size: 12px;
+    background: white;
+    padding: .3em;
 }
 button.btn-form-sm {
     border-radius: 50vh !important;
@@ -69,4 +76,8 @@ span.clear-x {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+}
+
+.bi {
+    margin: .5rem;
 }

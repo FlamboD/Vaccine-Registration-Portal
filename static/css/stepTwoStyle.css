@@ -7,13 +7,14 @@ body
 /*Main container*/
 .container
 {
-    position: absolute;
+    /*position: absolute;*/
     display: flex;
     flex-direction: column;
     top: 12em;
     right: 0.8em;
-    margin-top: -6.25rem;
-    margin-left: -6.25rem;
+    /*margin-top: -6.25rem;*/
+    /*margin-left: -6.25rem;*/
+    width: 70%;
 }
 .form-check
 {
@@ -27,7 +28,7 @@ body
 
     background-color: inherit;
     position:relative;
-    width: 79%;
+    /*width: 79%;*/
 }
 .form-control
 {
@@ -45,7 +46,7 @@ body
     background-color: inherit;
     border-color: dodgerblue;
     box-shadow: none;
-    border-width: small;
+    /*border-width: small;*/
 }
 .form-control:focus ~.label-input,.form-control:not(:placeholder-shown).form-control:not(:focus) ~.label-input
 {
@@ -95,7 +96,7 @@ body
 .dropdown
 {
     position: relative;
-    width:79%;
+    /*width:79%;*/
     height:3.5rem;
 }
 
@@ -130,12 +131,12 @@ body
 /****************************Buttons******************************/
 .button
 {
-    position: relative;
+    /*position: relative;*/
     color:#2397f3;
-    height:fit-content;
+    /*height:fit-content;*/
     height:2.9em;
     width:7em;
-    right:5em;
+    /*right:5em;*/
 }
 .back
 {   

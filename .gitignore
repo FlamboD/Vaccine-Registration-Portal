@@ -1,5 +1,6 @@
 **/test.py
 **/.idea
-/modules/__pycache__
 venv
-.env
+**/*.db
+**/*.sqlite
+**/*.env
