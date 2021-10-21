@@ -19,13 +19,3 @@ class personal_details(db.Model):
         self.dob = dob
         self.gender = gender
 
-class contact_details(db.Model):
-    __tablename__ = 'Contact_Details'
-    id = db.Column(db.String(13), foreign_key = True)
-    cellphone_number =  db.Column(db.String(10))
-    email_address = db.Column(db.String())
-
-    def __init__(self,id, cellphone_number,email_address):
-        self.id = id
-        self.cellphone_number = cellphone_number
-        self.email_address = email_address
