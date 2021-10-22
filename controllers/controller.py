@@ -1,59 +1,77 @@
-from flask import Flask, render_template, make_response, request, redirect
+from flask import render_template, make_response, request, redirect, session
+from VaccineRegistration import VaccineRegistration
+from modules.decoders import vaccineRegistrationDecoder
 from modules import dataValidation
 from modules import models
+from uuid import uuid4
+import json
 
 
 class Controller:
     @staticmethod
     def page0():
+        if not session.get("id"):
+            session["id"] = uuid4()
+            session["user"] = VaccineRegistration().__dict__
+
         warning_phrase = ["Tap the box above to make a choice","This field must be selected"]
         if request.args.get("isOver18") == "YES":
             return redirect("/1")
         resp = make_response(render_template("0.html", **request.args))
-        resp.set_cookie('page', "0")
         return resp
 
     @staticmethod
     def page1():
+        if not session.get("user") or not session.get("user")["is_over_18"]:
+            return redirect("0")
         req = request.args
-        if req.get("id")=="true":
+        if req.get("id") == "true":
             return redirect("/2")
-        elif req.get("passport")=="true":
+        elif req.get("passport") == "true":
             pass
-        elif req.get("asylum")=="true":
+        elif req.get("asylum") == "true":
             pass
-        elif req.get("back")=="true":
+        elif req.get("back") == "true":
             return redirect("/0")
         else:
             pass
-        resp = make_response(render_template("1.html",**request.args))
-        resp.set_cookie('page',"1")
+        resp = make_response(render_template("1.html", **request.args))
         return resp
 
     @staticmethod
     def page2():
-        ID = name = surname = dob = confID = passport = ""
-        checksum = True
+        if not session.get("user") or not session.get("user")["is_over_18"]:
+            return redirect("0")
         if request.method == "POST":
             ID = request.form["IDNumber"]
-            name = request.form["firstname"]
-            dob = request.form["dob"]
-            passport = request.form["passport"]
             confID = request.form["confIDNum"]
-            surname = request.form["surname"]
-            gender = request.form["gender"]
-            checksum = dataValidation.validateChecksum(ID)
             id_match = dataValidation.id_match(ID, confID)
-            if checksum:
-                PDetails = models.personal_details(ID, passport, surname, name, dob, gender)
-                models.db.session.add(PDetails)
-                models.db.session.commit()
+            checksum = dataValidation.validateChecksum(ID)
+            if checksum and id_match:
+                user = vaccineRegistrationDecoder(session["user"])
+                user.id_number = ID
+                user.first_names = request.form["firstname"]
+                user.last_name = request.form["surname"]
+                user.date_of_birth = request.form["dob"]
+                user.passport_number = request.form["passport"]
+                user.gender = request.form["gender"]
+                session["user"] = user.__dict__
+                # PDetails = models.User(
+                #     id_number=ID, passport_number=passport, surname, name, dob, gender)
+                # models.db.session.add(PDetails)
+                # models.db.session.commit()
                 return redirect("/3")
             else:
                 pass
+        resp = make_response(render_template("2.html", **request.args))
+        return resp
 
     @staticmethod
     def page3():
+        if not session.get("user") or not session.get("user")["is_over_18"]:
+            return redirect("0")
+        print(session["user"])
+        print(vaccineRegistrationDecoder(session["user"]))
         if request.args.get('next') == "true":
             return redirect("/4")
         elif request.args.get("back") == "true":
@@ -62,11 +80,12 @@ class Controller:
             pass
 
         resp = make_response(render_template("3.html", **request.args))
-        resp.set_cookie('page', "3")
         return resp
 
     @staticmethod
     def page4():
+        if not session.get("user") or not session.get("user")["is_over_18"]:
+            return redirect("0")
         if request.args.get("return") == "true":
             return redirect("3")
 

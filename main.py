@@ -10,6 +10,8 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
+app.config["SESSION_TYPE"] = 'filesystem'
+app.secret_key = "secret"
 models.db.init_app(app)
 
 
@@ -32,7 +34,7 @@ def step1():
     return Controller.page1()
 
 
-@app.route("/2")
+@app.route("/2", methods=["GET", "POST"])
 def step2():
     print({**request.cookies})
     print(bool(request.cookies))
@@ -82,6 +84,8 @@ if __name__ == "__main__":
     # DatabaseController.create()
 
     with app.app_context():
+        engine = models.db.get_engine()
         models.db.create_all()
+        models.setup_defaults()
     app.run(debug=True)
 
