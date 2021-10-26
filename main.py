@@ -22,41 +22,31 @@ def page_not_found(e):
 
 @app.route("/0")
 def home():
-    print({**request.cookies})
-    print(bool(request.cookies))
     return Controller.page0()
 
 
 @app.route("/1")
 def step1():
-    print({**request.cookies})
-    print(bool(request.cookies))
     return Controller.page1()
 
 
 @app.route("/2", methods=["GET", "POST"])
 def step2():
-    print({**request.cookies})
-    print(bool(request.cookies))
     return Controller.page2()
 
 
 @app.route("/3")
 def step3():
-    print({**request.cookies})
-    print(bool(request.cookies))
     return Controller.page3()
 
 
 @app.route("/4")
 def step4():
-    print({**request.args})
     return Controller.page4()
 
 
 @app.route("/5")
 def step5():
-    print({**request.args})
     return Controller.page5()
 
 

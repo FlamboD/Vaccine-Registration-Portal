@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 import uuid
 
+from VaccineRegistration import VaccineRegistration
+
 db = SQLAlchemy()
 
 
@@ -229,6 +231,84 @@ LOCATIONS = {
     ]
 }
 
+MEDICAL_AID_SCHEMES = [
+    "AECI MEDICAL AID SOCIETY",
+    "ALLIANCE-MIDMED MEDICAL SCHEME",
+    "ANGLO MEDICAL SCHEME",
+    "ANGLOVAAL GROUP MEDICAL SCHEME",
+    "BANKMED",
+    "BARLOWORLD MEDICAL SCHEME",
+    "BESTMED MEDICAL SCHEME",
+    "BMW EMPLOYEES MEDICAL AID SOCIETY",
+    "BONITAS MEDICAL FUND",
+    "BP MEDICAL AID SOCIETY",
+    "BUILDING & CONSTRUCTION INDUSTRY MEDICAL AID FUND",
+    "CAPE MEDICAL PLAN",
+    "CHARTERED ACCOUNTANTS (SA) MEDICAL AID FUND (CAMAF)",
+    "COMPCARE WELLNESS MEDICAL SCHEME",
+    "DE BEERS BENEFIT SOCIETY",
+    "DISCOVERY HEALTH MEDICAL SCHEME",
+    "ENGEN MEDICAL BENEFIT FUND",
+    "FEDHEALTH MEDICAL SCHEME",
+    "FISHING INDUSTRY MEDICAL SCHEME (FISH-MED)",
+    "FOODMED MEDICAL SCHEME",
+    "GENESIS MEDICAL SCHEME",
+    "GLENCORE MEDICAL SCHEME",
+    "GOLDEN ARROWS EMPLOYEES' MEDICAL BENEFIT FUND",
+    "GOVERNMENT EMPLOYEES MEDICAL SCHEME (GEMS)",
+    "HEALTH SQUARED MEDICAL SCHEME",
+    "HORIZON MEDICAL SCHEME",
+    "HOSMED MEDICAL AID SCHEME",
+    "IMPALA MEDICAL PLAN",
+    "IMPERIAL AND MOTUS MEDICAL AID",
+    "KEYHEALTH",
+    "LA-HEALTH MEDICAL SCHEME",
+    "LIBCARE MEDICAL SCHEME",
+    "LONMIN MEDICAL SCHEME",
+    "MAKOTI MEDICAL SCHEME",
+    "MALCOR MEDICAL SCHEME",
+    "MASSMART HEALTH PLAN",
+    "MBMED MEDICAL AID FUND",
+    "MEDIHELP",
+    "MEDIMED MEDICAL SCHEME",
+    "MEDIPOS MEDICAL SCHEME",
+    "MEDSHIELD MEDICAL SCHEME",
+    "MOMENTUM MEDICAL SCHEME",
+    "MOTOHEALTH CARE",
+    "MULTICHOICE MEDICAL AID SCHEME",
+    "NEDGROUP MEDICAL AID SCHEME",
+    "NETCARE MEDICAL SCHEME",
+    "OLD MUTUAL STAFF MEDICAL AID FUND",
+    "PARMED MEDICAL AID SCHEME",
+    "PG GROUP MEDICAL SCHEME",
+    "PICK N PAY MEDICAL SCHEME",
+    "PLATINUM HEALTH",
+    "PROFMED",
+    "QUANTUM MEDICAL AID SOCIETY",
+    "RAND WATER MEDICAL SCHEME",
+    "REMEDI MEDICAL AID SCHEME",
+    "RETAIL MEDICAL SCHEME",
+    "RHODES UNIVERSITY MEDICAL SCHEME",
+    "SABC MEDICAL AID SCHEME",
+    "SAMWUMED",
+    "SASOLMED",
+    "SEDMED",
+    "SISONKE HEALTH MEDICAL SCHEME",
+    "SIZWE MEDICAL FUND",
+    "SOUTH AFRICAN BREWERIES MEDICAL SCHEME",
+    "SOUTH AFRICAN POLICE SERVICE MEDICAL SCHEME (POLMED)",
+    "SUREMED HEALTH",
+    "TFG MEDICAL AID SCHEME",
+    "THEBEMED",
+    "TIGER BRANDS MEDICAL SCHEME",
+    "TRANSMED MEDICAL FUND",
+    "TSOGO SUN GROUP MEDICAL SCHEME",
+    "UMVUZO HEALTH MEDICAL SCHEME",
+    "UNIVERSITY OF KWA-ZULU NATAL MEDICAL SCHEME",
+    "WITBANK COALFIELDS MEDICAL AID SCHEME",
+    "WOOLTRU HEALTHCARE FUND"
+]
+
 
 def random_key() -> str:
     return str(uuid.uuid4())
@@ -298,14 +378,23 @@ class VaccineTimePreference(db.Model):
         self.morning = morning
 
 
-class MedicalAid(db.Model):
+class MedicalAidScheme(db.Model):
     ID = db.Column(db.String, primary_key=True, default=random_key)
     scheme_name = db.Column(db.String, nullable=False)
-    number = db.Column(db.String, nullable=False)
 
-    def __init__(self, *, scheme_name, number):
+    def __init__(self, *, scheme_name):
         self.ID = random_key()
         self.scheme_name = scheme_name
+
+
+class MedicalAid(db.Model):
+    ID = db.Column(db.String, primary_key=True, default=random_key)
+    scheme = db.Column(db.String, db.ForeignKey(MedicalAidScheme.ID), nullable=False)
+    number = db.Column(db.String, nullable=False)
+
+    def __init__(self, *, scheme, number):
+        self.ID = random_key()
+        self.scheme = scheme
         self.number = number
 
 
@@ -351,16 +440,51 @@ def setup_defaults():
         for gender in ("Male", "Female", "Other"):
             db.session.add(Gender(gender=gender))
 
-    if not db.session.query(Province).count():
+    if not Province.query.count():
         Municipality.query.delete()
         for province in LOCATIONS:
             _p = Province(name=province)
             db.session.add(_p)
             _LOCATIONS[_p.ID] = LOCATIONS[province]
 
-    if not db.session.query(Municipality).count() and _LOCATIONS:
+    if not Municipality.query.count() and _LOCATIONS:
         for province in _LOCATIONS:
             for municipality in _LOCATIONS[province]:
                 db.session.add(Municipality(province=province, name=municipality))
 
+    if not MedicalAidScheme.query.count():
+        for scheme_name in MEDICAL_AID_SCHEMES:
+            db.session.add(MedicalAidScheme(scheme_name=scheme_name))
+
     db.session.commit()
+
+
+def submit(user: VaccineRegistration):
+    exists = User.query.get(user.id_number)
+    if not exists:
+        contact_details = ContactDetails(email=user.email, phone_number=user.mobile_number)
+        db.session.add(contact_details)
+        location = Location(province=user.province, municipality=user.municipality, address=user.address)
+        db.session.add(location)
+        medical_aid = MedicalAid(scheme=user.medical_aid_scheme, number=user.medical_aid_number)
+        if user.medical_aid:
+            db.session.add(medical_aid)
+        time_pref = VaccineTimePreference(weekday=user.weekday == 1, morning=user.morning == 1)
+        db.session.add(time_pref)
+
+        db.session.commit()
+
+        _user = User(
+            id_number=user.id_number,
+            first_names=user.first_names,
+            last_name=user.surname,
+            passport_number=user.passport_number,
+            gender=user.gender,
+            contact_details=contact_details.ID,
+            location=location.ID,
+            vaccine_time_preference=time_pref.ID,
+            medical_aid=medical_aid.ID if user.medical_aid else None)
+        db.session.add(_user)
+
+        db.session.commit()
+    print("NOT IMPLEMENTED")

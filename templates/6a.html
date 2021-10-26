@@ -43,7 +43,12 @@
             <div class="row justify-content-center gy-4">
                 <div class="col col-lg-8">
                     <div class="clear-x label-in-border">
-                        <select name="medical-scheme-name" id="medical-scheme-name" class="form-select" required></select>
+                        <select name="medical-scheme-name" id="medical-scheme-name" class="form-select" required>
+                            <option value="" {% if not user.medical_aid_scheme %}selected{% endif %} disabled hidden></option>
+                            {% for scheme in schemes %}
+                                <option value="{{ scheme.ID }}" {% if user.medical_aid_scheme == scheme.ID %}selected{% endif %}>{{ scheme.scheme_name }}</option>
+                            {% endfor %}
+                        </select>
                         <span class="clear-x" onclick="clearMedicalScheme();">✕</span>
                         <label for="medical-scheme-name">Medical aid scheme name</label>
                     </div>
@@ -53,7 +58,7 @@
 
             <div class="row justify-content-center gy-4">
                 <div class="col col-8 label-in-border">
-                    <input name="medical-scheme-number" id="medical-scheme-number" class="form-control" required>
+                    <input name="medical-scheme-number" id="medical-scheme-number" class="form-control" required value="{{ user.medical_aid_number }}">
                     <label for="medical-scheme-number">Medical aid scheme number</label>
                 </div>
             </div>
@@ -70,100 +75,6 @@
     </form>
 
     <script>
-        let schemes = [
-            "AECI MEDICAL AID SOCIETY",
-            "ALLIANCE-MIDMED MEDICAL SCHEME",
-            "ANGLO MEDICAL SCHEME",
-            "ANGLOVAAL GROUP MEDICAL SCHEME",
-            "BANKMED",
-            "BARLOWORLD MEDICAL SCHEME",
-            "BESTMED MEDICAL SCHEME",
-            "BMW EMPLOYEES MEDICAL AID SOCIETY",
-            "BONITAS MEDICAL FUND",
-            "BP MEDICAL AID SOCIETY",
-            "BUILDING & CONSTRUCTION INDUSTRY MEDICAL AID FUND",
-            "CAPE MEDICAL PLAN",
-            "CHARTERED ACCOUNTANTS (SA) MEDICAL AID FUND (CAMAF)",
-            "COMPCARE WELLNESS MEDICAL SCHEME",
-            "DE BEERS BENEFIT SOCIETY",
-            "DISCOVERY HEALTH MEDICAL SCHEME",
-            "ENGEN MEDICAL BENEFIT FUND",
-            "FEDHEALTH MEDICAL SCHEME",
-            "FISHING INDUSTRY MEDICAL SCHEME (FISH-MED)",
-            "FOODMED MEDICAL SCHEME",
-            "GENESIS MEDICAL SCHEME",
-            "GLENCORE MEDICAL SCHEME",
-            "GOLDEN ARROWS EMPLOYEES' MEDICAL BENEFIT FUND",
-            "GOVERNMENT EMPLOYEES MEDICAL SCHEME (GEMS)",
-            "HEALTH SQUARED MEDICAL SCHEME",
-            "HORIZON MEDICAL SCHEME",
-            "HOSMED MEDICAL AID SCHEME",
-            "IMPALA MEDICAL PLAN",
-            "IMPERIAL AND MOTUS MEDICAL AID",
-            "KEYHEALTH",
-            "LA-HEALTH MEDICAL SCHEME",
-            "LIBCARE MEDICAL SCHEME",
-            "LONMIN MEDICAL SCHEME",
-            "MAKOTI MEDICAL SCHEME",
-            "MALCOR MEDICAL SCHEME",
-            "MASSMART HEALTH PLAN",
-            "MBMED MEDICAL AID FUND",
-            "MEDIHELP",
-            "MEDIMED MEDICAL SCHEME",
-            "MEDIPOS MEDICAL SCHEME",
-            "MEDSHIELD MEDICAL SCHEME",
-            "MOMENTUM MEDICAL SCHEME",
-            "MOTOHEALTH CARE",
-            "MULTICHOICE MEDICAL AID SCHEME",
-            "NEDGROUP MEDICAL AID SCHEME",
-            "NETCARE MEDICAL SCHEME",
-            "OLD MUTUAL STAFF MEDICAL AID FUND",
-            "PARMED MEDICAL AID SCHEME",
-            "PG GROUP MEDICAL SCHEME",
-            "PICK N PAY MEDICAL SCHEME",
-            "PLATINUM HEALTH",
-            "PROFMED",
-            "QUANTUM MEDICAL AID SOCIETY",
-            "RAND WATER MEDICAL SCHEME",
-            "REMEDI MEDICAL AID SCHEME",
-            "RETAIL MEDICAL SCHEME",
-            "RHODES UNIVERSITY MEDICAL SCHEME",
-            "SABC MEDICAL AID SCHEME",
-            "SAMWUMED",
-            "SASOLMED",
-            "SEDMED",
-            "SISONKE HEALTH MEDICAL SCHEME",
-            "SIZWE MEDICAL FUND",
-            "SOUTH AFRICAN BREWERIES MEDICAL SCHEME",
-            "SOUTH AFRICAN POLICE SERVICE MEDICAL SCHEME (POLMED)",
-            "SUREMED HEALTH",
-            "TFG MEDICAL AID SCHEME",
-            "THEBEMED",
-            "TIGER BRANDS MEDICAL SCHEME",
-            "TRANSMED MEDICAL FUND",
-            "TSOGO SUN GROUP MEDICAL SCHEME",
-            "UMVUZO HEALTH MEDICAL SCHEME",
-            "UNIVERSITY OF KWA-ZULU NATAL MEDICAL SCHEME",
-            "WITBANK COALFIELDS MEDICAL AID SCHEME",
-            "WOOLTRU HEALTHCARE FUND"
-        ];
-
-        let select = document.getElementById('medical-scheme-name');
-        select.innerHTML = "";
-        let o = document.createElement("option");
-        o.value = "";
-        o.innerHTML = "";
-        select.append(o);
-        o.setAttribute("disabled", "true");
-        o.setAttribute("selected", "true");
-        o.setAttribute("hidden", "true");
-        schemes.forEach(i => {
-            let o = document.createElement("option");
-            o.value = i;
-            o.innerHTML = i;
-            select.append(o);
-        });
-
         function clearMedicalScheme() {
             let select = document.getElementById('medical-scheme-name');
             select.value = "";

@@ -5,7 +5,7 @@ class VaccineRegistration:
     def __init__(
             self,
             *args,
-            older_than_18: typing.Optional[bool] = None,
+            older_than_18: bool = False,
             id_number: str = None,
             passport_number: str = None,
             date_of_birth: str = None,
@@ -17,13 +17,14 @@ class VaccineRegistration:
             province: str = None,
             municipality: str = None,
             address: str = None,
-            weekday: bool = typing.Optional[None],
-            morning: bool = typing.Optional[None],
-            medical_aid: bool = None,
-            medical_aid_scheme_name: str = None,
+            weekday: int = -1,
+            morning: int = -1,
+            medical_aid: bool = False,
+            medical_aid_scheme: str = None,
             medical_aid_number: str = None,
             **kwargs
     ):
+        self.older_than_18: bool = older_than_18
         self.id_number: str = id_number
         self.passport_number: typing.Optional[str] = passport_number
         self.date_of_birth: str = date_of_birth
@@ -35,8 +36,8 @@ class VaccineRegistration:
         self.province: str = province
         self.municipality: str = municipality
         self.address: str = address
-        self.weekday: typing.Optional[bool] = weekday
-        self.morning: typing.Optional[bool] = morning
+        self.weekday: int = weekday
+        self.morning: int = morning
         self.medical_aid: bool = medical_aid
-        self.medical_aid_scheme_name: str = medical_aid_scheme_name
+        self.medical_aid_scheme: str = medical_aid_scheme
         self.medical_aid_number: str = medical_aid_number

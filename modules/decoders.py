@@ -1,5 +1,9 @@
 from VaccineRegistration import VaccineRegistration
 
 
-def vaccineRegistrationDecoder(obj) -> VaccineRegistration:
+def VRDecoder(obj) -> VaccineRegistration:
     return VaccineRegistration(**obj)
+
+
+def VREncoder(obj):
+    return obj.__dict__

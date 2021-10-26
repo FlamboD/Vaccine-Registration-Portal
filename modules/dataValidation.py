@@ -1,3 +1,6 @@
+from VaccineRegistration import VaccineRegistration
+
+
 def validateChecksum(id_number: str):
     if not id_number.isdigit or len(id_number) != 13: return False
 
@@ -38,3 +41,25 @@ def validateChecksum(id_number: str):
 
 def id_match(id_number: str, conf_id: str):
     return str(id_number) == str(conf_id)
+
+
+def access_page(page: int, vrp: VaccineRegistration):
+    print(vrp.__dict__)
+
+    def inner():
+        if not vrp or not vrp.older_than_18:
+            return 0
+        if not vrp.id_number:
+            return 2
+        if not vrp.mobile_number:
+            return 3
+        if not vrp.province:
+            return 4
+        if -1 in (vrp.morning, vrp.weekday):
+            return 5
+        if page == 6 and not vrp.medical_aid:
+            return 6
+        return page
+
+    print(inner(), page)
+    return min(inner(), page)

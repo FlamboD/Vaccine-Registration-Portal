@@ -38,7 +38,7 @@
                 <div class="col col-lg-8">
                     <select name="province" id="province" class="form-select" onchange="populateMunicipalities();">
                         {% for p in provinces %}
-                            <option value="{{ p[1] }}" {% if province %}{% if province == p[1] %}selected{% endif %}{% endif %}>{{ p[0] }}</option>
+                            <option value="{{ p[1] }}" selected="{{ p[1] == province[1][1] if not user.province else user.province == p[1] }}">{{ p[0] }}</option>
                         {% endfor %}
                     </select>
                     <div class="label-in-border">
@@ -50,16 +50,17 @@
             <div class="row justify-content-center">
                 <div class="col col-lg-8">
                     <label for="municipality"></label>
-                    <select name="municipality" id="municipality" class="form-select" required {% if municipality %}value="{{ municipality }}"{% endif %}>
-                        {% if province %}
-                            <option value="" style="color: grey;" hidden disabled {% if not municipality %}selected{% endif %}>Municipalities</option>
-                            {% for m in municipalities[province] %}
-                                <option value="{{ m }}" {% if municipality == m %}selected{% endif %}>{{ m }}</option>
+                    <select name="municipality" id="municipality" class="form-select" required {% if municipality %} value="{{ municipality }}"{% endif %}>
+                        {% if user.municipality %}
+                            <option value="" style="color: grey;" hidden disabled>Municipality</option>
+                            <option value="Test">Test</option>
+                            {% for m in municipalities[user.province] %}
+                                <option value="{{ m[1] }}" {% if user.municipality == m[1] %} selected {% endif %}>{{ m[0] }}</option>
                             {% endfor %}
                         {% else %}}
-                            <option value="" style="color: grey;" hidden disabled selected>Municipalities</option>
-                            {% for m in municipalities["EC"] %}
-                                <option value="{{ m }}">{{ m }}</option>
+                            <option value="" style="color: grey;" hidden disabled selected>Municipality</option>
+                            {% for m in municipalities[provinces[0][1]] %}
+                                <option value="{{ m[1] }}">{{ m[0] }}</option>
                             {% endfor %}
                         {% endif %}
                     </select>
@@ -68,7 +69,7 @@
             <div class="row justify-content-center">
                 <div class="col col-lg-8">
                     <label for="address"></label>
-                    <input type="text" id="address" name="address" class="form-control" placeholder="Address">
+                    <input type="text" id="address" name="address" class="form-control" placeholder="Address" value="{{ user.address }}">
                     <label class="label-sub" for="address">Address is optional</label>
                 </div>
             </div>
@@ -99,10 +100,10 @@
             o.setAttribute("hidden", "true");
             province_municipalities.forEach(i => {
                 let o = document.createElement("option");
-                o.value = i;
-                o.innerHTML = i;
+                o.value = i[1];
+                o.innerHTML = i[0];
                 datalist.append(o);
             });
-        }
+        } // populateMunicipalities();
     </script>
 {% endblock %}

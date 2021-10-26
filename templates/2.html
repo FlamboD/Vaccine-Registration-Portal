@@ -13,53 +13,52 @@
         <div class="container">
             <form id="input-form" action="/2" method="POST">
                 <div class="form-group">
-                  <input type="text" onkeyup="validate(this.value)" class="form-control" id="IDNumber" name="IDNumber" value="{{ id }}" placeholder=" " minlength="13" maxlength="13" required>
+                  <input type="text" onkeyup="validate(this.value)" class="form-control" id="IDNumber" name="IDNumber" value="{{ user.id_number }}" placeholder=" " minlength="13" maxlength="13" required>
                   <label for="IDNumber" id="id-label" class="label-input id-label">ID Number</label>
                   <span id="valid-id">
                     ID must be a valid SA 13-digit ID number
                   </span>
                 </div>
                 <div style="display: none;" class="form-group" id ="confIDNumber">
-                    <input type="text" class="form-control" id="confIDNum" name="confIDNum"  value="{{ confID }}" placeholder=" " minlength="13" maxlength="13">
-                    <label for="IDNumber" id="cid-label" class="label-input id-label">Confirm ID Number</label>
+                    <input type="text" class="form-control" id="confIDNum" name="confIDNum"  value="{{ user.id_number }}" placeholder="Confirm ID Number" minlength="13" maxlength="13">
+                    <label for="confIDNum" id="cid-label" class="label-input id-label">Confirm ID Number</label>
                 </div>
                 
                 <div class="form-group">
                   
-                  <input type="text" class="form-control" id="passport" value="{{ passport }}"name="passport"placeholder=" ">
+                  <input type="text" class="form-control" id="passport" value="{{ user.passport_number }}" name="passport" placeholder="Passport Number(Optional)">
                   <label for="passport" class="label-input" >Passport Number(Optional)</label>
                   
                 </div>
                 <div class="form-group">
-                    
-                    <input type="text" class="form-control" id="dob" value="{{ dob }}"name="dob" value="" placeholder=" ">
-                    <label for="dob" class="label-input dob-label">Date of Birth(CCYY/MM/DD)</label>
+                    <input type="text" class="form-control" id="dob" value="{{ user.date_of_birth }}" name="dob" placeholder="Date of Birth(CCYY/MM/DD)">
+                    <label for="dob" class="label-input dob-label"></label>
                     <i onclick="date()" id="calendar" class="fa fa-calendar"></i>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="firstname" value="{{ name }}" name="firstname" placeholder=" " required>
+                    <input type="text" class="form-control" id="firstname" value="{{ user.first_names }}" name="firstname" placeholder="First Name(s)" required>
                     <label for="firstname" class="label-input name-label">First Name(s)</label>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="surname" value="{{ surname }}" name="surname" placeholder=" " required>
-                    <label for="IDNumber" class="label-input surname-label">Surname</label>
+                    <input type="text" class="form-control" id="surname" value="{{ user.surname }}" name="surname" placeholder=" " required>
+                    <label for="surname" class="label-input surname-label">Surname</label>
                 </div>
                
                 <div class="dropdown">
                     <select name="gender" id="gender" class="form-select dropdown-toggle" onchange="hide()" required>
-                        <option class="option" value="" hidden></option> 
-                        <option class="option" value="male">Male</option> 
-                        <option class="option" value="female">Female</option>
-                        <option class="option" value="other">Other</option>
+                        <option class="option" value="" hidden></option>
+                        {% for gender in genders %}
+                            <option class="option" value="{{ gender.ID }}" selected="{{ gender.ID == user.gender }}">{{ gender.gender }}</option>
+                        {% endfor %}
                     </select>
-                    <label for="dropdownMenuButton" id="label-gender"class="btn-label">Gender</label>    
+                    <label for="gender" id="label-gender" class="btn-label"></label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="flexCheckDefault" value="" id="flexCheckDefault" onclick="enableButton()"required>
+                    <input class="form-check-input" type="checkbox" name="flexCheckDefault" value="" id="flexCheckDefault" onclick="enableButton()" required>
                     <label for="flexCheckDefault">I confirm that the information provided is correct</label>
                 </div>
                 <div class="back">
-                    <button type="button" id="back-button" name="back" value="true"class="btn btn-primary button">Go Back</button>
+                    <button type="button" id="back-button" name="back" value="true" class="btn btn-primary button">Go Back</button>
                     <button type="submit" id="next" name="next" value="true" class="btn btn-primary button" disabled>Next Step</button>
                 </div>
               </form>
