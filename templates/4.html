@@ -38,7 +38,11 @@
                 <div class="col col-lg-8">
                     <select name="province" id="province" class="form-select" onchange="populateMunicipalities();">
                         {% for p in provinces %}
-                            <option value="{{ p[1] }}" selected="{{ p[1] == province[1][1] if not user.province else user.province == p[1] }}">{{ p[0] }}</option>
+                            <option value="{{ p[1] }}" {% if province %}{% if province == p[1] %}selected{% endif %}{% endif %}>{{ p[0] }}</option>
+                        {% endfor %}
+
+                        {% for p in provinces %}
+                            <option value="{{ p[1] }}" selected="{{ p[1] == provinces[1][1] if not user.province else user.province == p[1] }}">{{ p[0] }}</option>
                         {% endfor %}
                     </select>
                     <div class="label-in-border">
