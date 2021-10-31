@@ -19,7 +19,10 @@ models.db.init_app(app)
 def page_not_found(e):
     return render_template("404.html"), 404
 
-
+@app.route("/")
+def home_():
+    return Controller.page0()
+    
 @app.route("/0")
 def home():
     return Controller.page0()
@@ -74,7 +77,7 @@ if __name__ == "__main__":
     # DatabaseController.create()
 
     with app.app_context():
-        engine = models.db.get_engine()
+       # engine = models.db.get_engine()
         models.db.create_all()
         models.setup_defaults()
     app.run(debug=True)
