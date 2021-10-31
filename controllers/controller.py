@@ -206,6 +206,8 @@ class Controller:
     def page7():
         if request.args.get("return") == "true":
             return redirect("6")
+        if request.args.get("submit")=="true":
+            return redirect("8")
 
         user = VRDecoder(session.get("user"))
         resp = make_response(render_template("7.html", **request.args, user=user))
