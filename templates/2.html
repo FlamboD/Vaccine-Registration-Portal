@@ -13,34 +13,34 @@
         <div class="container">
             <form id="input-form" action="/2" method="POST">
                 <div class="form-group">
-                  <input type="text" onkeyup="validate(this.value)" class="form-control" id="IDNumber" name="IDNumber" value="{{ user.id_number }}" placeholder=" " minlength="13" maxlength="13" required>
+                  <input type="text" onkeyup="validate(this.value)" class="form-control" id="IDNumber" name="IDNumber" value="{{ user.id_number if user.id_number }}" placeholder="ID Number" minlength="13" maxlength="13" required>
                   <label for="IDNumber" id="id-label" class="label-input id-label">ID Number</label>
                   <span id="valid-id">
                     ID must be a valid SA 13-digit ID number
                   </span>
                 </div>
                 <div style="display: none;" class="form-group" id ="confIDNumber">
-                    <input type="text" class="form-control" id="confIDNum" name="confIDNum"  value="{{ user.id_number }}" placeholder="Confirm ID Number" minlength="13" maxlength="13">
+                    <input type="text" class="form-control" id="confIDNum" name="confIDNum"  value="{{ user.id_number if user.id_number }}" placeholder="Confirm ID Number" minlength="13" maxlength="13">
                     <label for="confIDNum" id="cid-label" class="label-input id-label">Confirm ID Number</label>
                 </div>
                 
                 <div class="form-group">
                   
-                  <input type="text" class="form-control" id="passport" value="{{ user.passport_number }}" name="passport" placeholder="Passport Number(Optional)">
+                  <input type="text" class="form-control" id="passport" value="{{ user.passport_number if user.passport_number }}" name="passport" placeholder="Passport Number(Optional)">
                   <label for="passport" class="label-input" >Passport Number(Optional)</label>
                   
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="dob" value="{{ user.date_of_birth }}" name="dob" placeholder="Date of Birth(CCYY/MM/DD)">
+                    <input type="text" class="form-control" id="dob" value="{{ user.date_of_birth if user.date_of_birth }}" name="dob" placeholder="Date of Birth(CCYY/MM/DD)">
                     <label for="dob" class="label-input dob-label"></label>
                     <i onclick="date()" id="calendar" class="fa fa-calendar"></i>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="firstname" value="{{ user.first_names }}" name="firstname" placeholder="First Name(s)" required>
+                    <input type="text" class="form-control" id="firstname" value="{{ user.first_names if user.first_names }}" name="firstname" placeholder="First Name(s)" required>
                     <label for="firstname" class="label-input name-label">First Name(s)</label>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="surname" value="{{ user.surname }}" name="surname" placeholder=" " required>
+                    <input type="text" class="form-control" id="surname" value="{{ user.surname if user.surname }}" name="surname" placeholder="Surname" required>
                     <label for="surname" class="label-input surname-label">Surname</label>
                 </div>
                
@@ -48,7 +48,7 @@
                     <select name="gender" id="gender" class="form-select dropdown-toggle" onchange="hide()" required>
                         <option class="option" value="" hidden></option>
                         {% for gender in genders %}
-                            <option class="option" value="{{ gender.ID }}" selected="{{ gender.ID == user.gender }}">{{ gender.gender }}</option>
+                            <option class="option" value="{{ gender.gender }}" selected="{{ gender.gender == user.gender }}">{{ gender.gender }}</option>
                         {% endfor %}
                     </select>
                     <label for="gender" id="label-gender" class="btn-label"></label>

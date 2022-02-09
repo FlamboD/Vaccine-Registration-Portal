@@ -131,6 +131,7 @@ class Controller:
 
         provinces = [(_.name, _.ID) for _ in models.Province.query.all()]
         municipalities = dict(groups)
+        print(provinces)
 
         user = VRDecoder(session.get("user"))
         resp = make_response(render_template("4.html", **request.args, provinces=provinces, municipalities=municipalities, user=user))

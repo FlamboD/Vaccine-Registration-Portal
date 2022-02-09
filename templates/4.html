@@ -37,13 +37,15 @@
             <div class="row justify-content-center">
                 <div class="col col-lg-8">
                     <select name="province" id="province" class="form-select" onchange="populateMunicipalities();">
+                    {% if not user.province %}
                         {% for p in provinces %}
-                            <option value="{{ p[1] }}" {% if province %}{% if province == p[1] %}selected{% endif %}{% endif %}>{{ p[0] }}</option>
+                            <option value="{{ p[1] }}" {% if p == provinces[0] %}selected{% endif %}>{{ p[0] }}</option>
                         {% endfor %}
-
+                    {% else %}
                         {% for p in provinces %}
-                            <option value="{{ p[1] }}" selected="{{ p[1] == provinces[1][1] if not user.province else user.province == p[1] }}">{{ p[0] }}</option>
+                            <option value="{{ p[1] }}" {% if (p[1] == provinces[1][1] if not user.province else user.province == p[1]) %}selected{% endif %}>{{ p[0] }}</option>
                         {% endfor %}
+                    {% endif %}
                     </select>
                     <div class="label-in-border">
                         <label for="province">Province</label>
@@ -73,7 +75,7 @@
             <div class="row justify-content-center">
                 <div class="col col-lg-8">
                     <label for="address"></label>
-                    <input type="text" id="address" name="address" class="form-control" placeholder="Address" value="{{ user.address }}">
+                    <input type="text" id="address" name="address" class="form-control" placeholder="Address" value="{{ user.address if user.address }}">
                     <label class="label-sub" for="address">Address is optional</label>
                 </div>
             </div>

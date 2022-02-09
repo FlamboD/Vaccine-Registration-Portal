@@ -1,12 +1,17 @@
+import os.path
 import sqlite3
 
 
 class DatabaseController:
-    PATH = "/../database/VaccineRegistration.db"
+    PATH = os.getcwd() + "/../database/VaccineRegistration.db"
 
     @classmethod
     def create(cls):
         print(cls.PATH)
+        os.makedirs(os.path.dirname(cls.PATH), exist_ok=True)
+        if not os.path.isfile(cls.PATH):
+            with open(cls.PATH, "x"):
+                pass
         conn = sqlite3.connect(cls.PATH)
         c = conn.cursor()
         c.execute(
@@ -21,7 +26,7 @@ class DatabaseController:
             """
             CREATE TABLE IF NOT EXISTS contact_details
             (
-                [id] INTEGER PRIMARY KEY,
+                [id] TEXT PRIMARY KEY,
                 [email] TEXT,
                 [phone_number] TEXT
             )
@@ -75,7 +80,7 @@ class DatabaseController:
                 FOREIGN KEY(contact_details) REFERENCES contact_details(id),
                 FOREIGN KEY(location) REFERENCES location(id),
                 FOREIGN KEY(vaccine_time_preference) REFERENCES vaccine_time_preference(id),
-                FOREIGN KEY(medical_aid) REFERENCES medical_aid(id),\
+                FOREIGN KEY(medical_aid) REFERENCES medical_aid(id)
             )
             """
         )
@@ -86,3 +91,4 @@ class DatabaseController:
     def connect(cls):
         cls.create()
         conn = sqlite3.connect(cls.PATH)
+        return conn

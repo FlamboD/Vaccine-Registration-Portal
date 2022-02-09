@@ -1,16 +1,18 @@
 import os
 
-from flask import Flask, render_template, request
+from dotenv import load_dotenv
+from flask import Flask, render_template
+
 from controllers.controller import Controller
 from controllers.database_controller import DatabaseController
-from dotenv import load_dotenv
 from modules import models
 
 load_dotenv()
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI")
+app.config['SQLALCHEMY_DATABASE_URI'] = str.format(os.getenv("DATABASE_URI"), dir=os.getcwd())
 app.config["SESSION_TYPE"] = 'filesystem'
+app.config['FLASK_DEBUG'] = 1
 app.secret_key = "secret"
 models.db.init_app(app)
 
@@ -74,10 +76,10 @@ def step8():
 
 
 if __name__ == "__main__":
-    # DatabaseController.create()
+    DatabaseController.create()
 
     with app.app_context():
-       # engine = models.db.get_engine()
+        # engine = models.db.get_engine()
         models.db.create_all()
         models.setup_defaults()
     app.run(debug=True)

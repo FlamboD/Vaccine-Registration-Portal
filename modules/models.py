@@ -335,11 +335,11 @@ class Municipality(db.Model):
 
 
 class Gender(db.Model):
-    ID = db.Column(db.String, primary_key=True, default=random_key)
-    gender = db.Column(db.String)
+    # ID = db.Column(db.String, primary_key=True, default=random_key)
+    gender = db.Column(db.String, primary_key=True)
 
     def __init__(self, *, gender):
-        self.ID = random_key()
+        # self.ID = random_key()
         self.gender = gender
 
 
@@ -401,9 +401,9 @@ class MedicalAid(db.Model):
 class User(db.Model):
     id_number = db.Column(db.String, primary_key=True)
     first_names = db.Column(db.String, nullable=False)
-    last_name = db.Column(db.String, nullable=False)
+    surname = db.Column(db.String, nullable=False)
     passport_number = db.Column(db.String)
-    gender = db.Column(db.String, db.ForeignKey(Gender.ID), nullable=False)
+    gender = db.Column(db.String, db.ForeignKey(Gender.gender), nullable=False)
     contact_details = db.Column(db.String, db.ForeignKey(ContactDetails.ID), nullable=False)
     location = db.Column(db.String, db.ForeignKey(Location.ID), nullable=False)
     vaccine_time_preference = db.Column(db.String, db.ForeignKey(VaccineTimePreference.ID), nullable=False)
@@ -414,7 +414,7 @@ class User(db.Model):
             *,
             id_number,
             first_names,
-            last_name,
+            surname,
             passport_number=None,
             gender,
             contact_details,
@@ -424,7 +424,7 @@ class User(db.Model):
     ):
         self.id_number = id_number
         self.first_names = first_names
-        self.last_name = last_name
+        self.surname = surname
         self.passport_number = passport_number
         self.gender = gender
         self.contact_details = contact_details
@@ -477,7 +477,7 @@ def submit(user: VaccineRegistration):
         _user = User(
             id_number=user.id_number,
             first_names=user.first_names,
-            last_name=user.surname,
+            surname=user.surname,
             passport_number=user.passport_number,
             gender=user.gender,
             contact_details=contact_details.ID,
