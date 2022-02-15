@@ -45,10 +45,10 @@
                 </div>
                
                 <div class="dropdown">
-                    <select name="gender" id="gender" class="form-select dropdown-toggle" onchange="hide()" required>
+                    <select name="gender" id="gender" class="form-select form-control dropdown-toggle" onchange="hide()" required>
                         <option class="option" value="" hidden></option>
                         {% for gender in genders %}
-                            <option class="option" value="{{ gender.gender }}" selected="{{ gender.gender == user.gender }}">{{ gender.gender }}</option>
+                            <option class="form-control" value="{{ gender.gender }}" selected="{{ gender.gender == user.gender }}">{{ gender.gender }}</option>
                         {% endfor %}
                     </select>
                     <label for="gender" id="label-gender" class="btn-label"></label>

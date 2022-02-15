@@ -28,7 +28,8 @@ div.label-in-border label {
     transform: translateY(-50%);
     font-size: 12px;
     background: white;
-    padding: .3em;
+    padding: 0 .3em;
+    border-radius: 15px;
 }
 button.btn-form-sm {
     border-radius: 50vh !important;

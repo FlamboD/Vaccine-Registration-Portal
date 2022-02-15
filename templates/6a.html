@@ -35,7 +35,7 @@
             </div>
 
             <div class="row justify-content-center gy-1">
-                <div class="col col-8 text-center">
+                <div class="col col-lg-8 text-center">
                     Please provide us with your accurate Medical Aid details.
                 </div>
             </div>
@@ -57,17 +57,17 @@
             </div>
 
             <div class="row justify-content-center gy-4">
-                <div class="col col-8 label-in-border">
-                    <input name="medical-scheme-number" id="medical-scheme-number" class="form-control" required value="{{ user.medical_aid_number }}">
+                <div class="col col-lg-8 label-in-border">
+                    <input name="medical-scheme-number" id="medical-scheme-number" class="form-control" required value="{{ user.medical_aid_number if user.medical_aid_number }}">
                     <label for="medical-scheme-number">Medical aid scheme number</label>
                 </div>
             </div>
 
             <div class="row justify-content-center gy-5">
-                <div class="col col-2">
+                <div class="col col-lg-2">
                     <button type="submit" name="return" value="true" class="btn btn-form-sm float-start" formnovalidate>Go back</button>
                 </div>
-                <div class="col col-2">
+                <div class="col col-lg-2">
                     <button type="submit" name="submit" value="true" class="btn btn-form-sm">Next step</button>
                 </div>
             </div>

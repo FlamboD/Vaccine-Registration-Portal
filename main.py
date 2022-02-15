@@ -2,11 +2,13 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask, render_template
+from flaskext.couchdb import CouchDBManager
 
 from controllers.controller import Controller
 from controllers.database_controller import DatabaseController
 from modules import models
 
+manager = CouchDBManager()
 load_dotenv()
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -82,5 +84,6 @@ if __name__ == "__main__":
         # engine = models.db.get_engine()
         models.db.create_all()
         models.setup_defaults()
+    manager.setup(app)
     app.run(debug=True)
 

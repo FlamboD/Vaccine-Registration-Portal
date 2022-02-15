@@ -335,11 +335,9 @@ class Municipality(db.Model):
 
 
 class Gender(db.Model):
-    # ID = db.Column(db.String, primary_key=True, default=random_key)
     gender = db.Column(db.String, primary_key=True)
 
     def __init__(self, *, gender):
-        # self.ID = random_key()
         self.gender = gender
 
 
